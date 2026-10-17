@@ -1,0 +1,93 @@
+/* ---------- nav ---------- */
+.nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 16px; padding: 10px clamp(12px,3vw,32px);
+  background: color-mix(in srgb, var(--page) 80%, transparent); backdrop-filter: blur(10px); color: var(--cardInk); }
+.brand { font-weight: 700; font-size: 1.2rem; color: inherit; text-decoration: none; }
+.links { display: flex; gap: 18px; margin-left: auto; }
+.links a { color: inherit; text-decoration: none; font-weight: 600; }
+.links a:hover { text-decoration: underline wavy; }
+.modes { display: flex; gap: 4px; }
+.modes button { font-size: 1.15rem; width: 38px; height: 38px; border-radius: 50%; border: 2px solid transparent; background: var(--card); cursor: pointer; }
+.modes button.on { border-color: var(--accent); transform: scale(1.1); }
+@media (max-width: 640px) { .links { display: none; } .modes { margin-left: auto; } .brand { font-size: 1rem; } }
+
+/* ---------- hero scene ---------- */
+.hero { position: relative; min-height: max(100svh, 780px); overflow: hidden; color: var(--ink);
+  background: linear-gradient(180deg, var(--sky1), var(--sky2) 62%); transition: background .6s; }
+.sky, .scenery { position: absolute; inset: 0; pointer-events: none; }
+.sky { z-index: 1; overflow: hidden; }
+.scenery { z-index: 2; }
+.intro { position: relative; z-index: 4; padding: clamp(20px,4vw,44px) clamp(16px,5vw,56px) 0; max-width: 620px; }
+.intro h1 { font-size: clamp(2.2rem, 7vw, 4.2rem); line-height: 1.02; margin: 0 0 10px; }
+.role { font-size: clamp(1rem,2.4vw,1.25rem); font-weight: 600; margin: 0 0 6px; }
+.hint { margin: 0; opacity: .85; }
+
+.sun { position: absolute; right: 9%; top: 9%; width: 88px; height: 88px; border-radius: 50%; background: #ffe27a;
+  box-shadow: 0 0 0 14px rgba(255,226,122,.35), 0 0 70px #ffe27a; }
+.moon { position: absolute; right: 9%; top: 9%; width: 86px; height: 86px; border-radius: 50%; background: #fff3c4; box-shadow: 0 0 50px #fff3c4; }
+.moon i { position: absolute; top: 36%; width: 9px; height: 12px; border-radius: 50%; background: #3b3358; animation: blink 4s infinite; }
+.moon i:nth-child(1) { left: 28%; } .moon i:nth-child(2) { left: 60%; }
+.moon b { position: absolute; left: 38%; top: 58%; width: 24px; height: 12px; border-bottom: 3px solid #3b3358; border-radius: 0 0 24px 24px; }
+@keyframes blink { 0%,92%,100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+
+.cloud { position: absolute; width: 150px; height: 46px; border-radius: 46px; background: var(--cloud); opacity: var(--cloudo); animation: drift 70s linear infinite; }
+.cloud::before, .cloud::after { content: ''; position: absolute; background: inherit; border-radius: 50%; }
+.cloud::before { width: 70px; height: 70px; left: 20px; top: -34px; } .cloud::after { width: 54px; height: 54px; right: 24px; top: -24px; }
+.c1 { top: 14%; left: -200px; } .c2 { top: 26%; left: -200px; animation-delay: -30s; transform: scale(.8); } .c3 { top: 6%; left: -200px; animation-delay: -52s; transform: scale(1.2); }
+@keyframes drift { to { left: 110%; } }
+
+.star { position: absolute; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #fff; animation: twinkle 2.4s ease-in-out infinite; }
+.shoot { position: absolute; top: 14%; left: 62%; width: 110px; height: 3px; border-radius: 3px; background: linear-gradient(90deg,#fff,transparent); opacity: 0; animation: shoot 7s ease-in infinite; }
+@keyframes shoot { 0%,72% { opacity: 0; transform: rotate(-26deg) translateX(0); } 76% { opacity: 1; } 100% { opacity: 0; transform: rotate(-26deg) translateX(-420px); } }
+.sparkle { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(#fff, rgba(255,255,255,0) 70%); box-shadow: 0 0 10px 2px rgba(255,240,150,.8); animation: twinkle 2.2s ease-in-out infinite; }
+@keyframes twinkle { 0%,100% { opacity: .2; transform: scale(.6); } 50% { opacity: 1; transform: scale(1.2); } }
+.drop { position: absolute; top: -20px; width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #8fd6ff 60%); box-shadow: 0 0 8px #bfe9ff; animation: down linear infinite; }
+@keyframes down { to { transform: translateY(105svh); } }
+.fall { position: absolute; top: -40px; animation: sway linear infinite; }
+@keyframes sway { 0% { transform: translate(0,0) rotate(0); } 50% { transform: translate(40px,55svh) rotate(180deg); } 100% { transform: translate(-20px,105svh) rotate(360deg); } }
+
+/* ---------- landscape ---------- */
+.hill { position: absolute; bottom: 36%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; transition: background .6s; }
+.h1 { left: -12%; width: 68%; height: 30%; background: var(--hill1); } .h2 { right: -14%; width: 72%; height: 38%; background: var(--hill2); }
+.ground { position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: var(--ground); transition: background .6s; }
+.river { position: absolute; left: 0; right: 0; bottom: 37%; height: 7%; background: repeating-linear-gradient(100deg, var(--river) 0 40px, color-mix(in srgb, var(--river) 80%, #fff) 40px 80px); background-size: 160px 100%; animation: flow 8s linear infinite; }
+@keyframes flow { to { background-position: 160px 0; } }
+.tree { position: absolute; bottom: 36%; width: 90px; height: 150px; transform: translateX(-50%) scale(var(--s)); transform-origin: bottom; }
+.tree b { position: absolute; left: 38px; bottom: 0; width: 16px; height: 70px; background: var(--trunk); border-radius: 6px; }
+.tree i { position: absolute; left: 0; bottom: 48px; width: 90px; height: 90px; border-radius: 50%; background: var(--tree); box-shadow: -20px 18px 0 -6px var(--tree), 22px 20px 0 -8px var(--tree); transition: background .6s; }
+.flowers { position: absolute; left: 0; right: 0; bottom: 1%; height: 40px; }
+.flowers span { position: absolute; bottom: 0; transform-origin: bottom; animation: wave 3s ease-in-out infinite; }
+@keyframes wave { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+
+/* ---------- pond ---------- */
+.pond { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 48%; cursor: pointer; touch-action: manipulation; }
+.water { position: absolute; left: 3%; right: 3%; top: 8%; bottom: 8%; border-radius: 50%; background: radial-gradient(ellipse, color-mix(in srgb, var(--river) 85%, #fff), var(--river)); box-shadow: inset 0 -10px 0 rgba(0,0,0,.08); transition: background .6s; }
+.leaf { position: absolute; border-radius: 50%; background: radial-gradient(ellipse at 40% 35%, var(--leafA), var(--leafB) 75%); box-shadow: 0 8px 0 rgba(0,0,0,.14); }
+.leaf::before { content: ''; position: absolute; inset: 16% 12%; border-radius: 50%; border: 2px solid rgba(255,255,255,.3); }
+.ripple { position: absolute; left: 50%; top: 55%; width: 40%; aspect-ratio: 1; border-radius: 50%; border: 3px solid rgba(255,255,255,.85); transform: translate(-50%,-50%) scale(.3); animation: ripple .8s ease-out forwards; }
+@keyframes ripple { to { transform: translate(-50%,-50%) scale(2.6); opacity: 0; } }
+.frog-wrap { position: absolute; width: clamp(96px,15vw,150px); transform: translate(-50%,-76%); pointer-events: none; z-index: 3; }
+.frog-wrap.Jini { pointer-events: auto; cursor: pointer; width: clamp(88px,13vw,134px); }
+.frog-hop { transform-origin: 50% 100%; }
+.frog { width: 100%; display: block; filter: drop-shadow(0 7px 0 rgba(0,0,0,.14)); animation: breathe 2.8s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes breathe { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.03,.97); } }
+.hearts { position: absolute; left: 50%; top: 10%; pointer-events: none; }
+.hearts span { position: absolute; font-size: 24px; opacity: 0; animation: floatUp 1.6s ease-out forwards; }
+@keyframes floatUp { 0% { opacity: 1; transform: translate(0,0); } 100% { opacity: 0; transform: translate(var(--dx), -190px) scale(1.4); } }
+
+/* ---------- content ---------- */
+.page { max-width: 1080px; margin: 0 auto; padding: 0 clamp(14px,4vw,32px) 40px; }
+.block { padding: 64px 0 8px; }
+.block h2 { font-size: clamp(1.8rem,5vw,2.8rem); margin: 0 0 22px; }
+.grid { display: grid; gap: 20px; } .two { grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); } .three { grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); }
+.card { background: var(--card); color: var(--cardInk); border-radius: 26px; padding: 22px; box-shadow: 0 8px 0 rgba(0,0,0,.07); transition: background .6s; }
+.card h3 { margin: 6px 0; font-size: 1.4rem; } .card p { margin: 6px 0; line-height: 1.5; }
+.who .avatar { width: 130px; margin-bottom: 4px; }
+.big { font-size: 2.4rem; }
+.proj { transition: transform .25s; } .proj:hover { transform: translateY(-6px) rotate(-1deg); }
+.story { display: grid; gap: 22px; }
+.scene { display: flex; gap: 18px; align-items: center; opacity: 0; transform: translateY(36px); transition: opacity .7s, transform .7s; }
+.scene.in { opacity: 1; transform: none; } .scene:nth-child(even) { flex-direction: row-reverse; text-align: right; }
+.scene .big { font-size: 3.6rem; }
+footer { text-align: center; padding: 56px 0 16px; opacity: .8; }
+
+@media (prefers-reduced-motion: reduce) { .cloud, .river, .flowers span, .frog, .fall, .drop, .shoot, .sparkle, .star { animation: none; } .scene { opacity: 1; transform: none; } }
